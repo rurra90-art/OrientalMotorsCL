@@ -224,6 +224,13 @@ main { padding-block: 20px 64px; min-height: 60vh; }
 .sec2 { margin-top: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); }
 .sec2 > h2 { font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: 22px; letter-spacing: .03em; margin: 0; padding: 14px 18px; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
 .sec2 > h2 small { font-family: var(--f-body); font-size: 13px; text-transform: none; letter-spacing: 0; color: var(--muted); font-weight: 500; }
+.sec2 { overflow: hidden; }
+.sec2 > h2 { background: linear-gradient(160deg, var(--band) 0%, var(--band-2) 100%); color: #fff; border-bottom: 3px solid var(--red); }
+.sec2 > h2 small { color: var(--band-muted); }
+.logo .logo-txt .tagline { display: grid; gap: 3px; margin-top: 6px; font-family: var(--f-body); text-transform: none; letter-spacing: 0; color: #fff; white-space: nowrap; }
+.logo.con-img .logo-txt .tagline { margin-top: 0; padding-left: 14px; border-left: 1px solid rgba(255, 255, 255, .3); line-height: 1; }
+.tagline em { font-style: normal; font-family: var(--f-display); font-weight: 700; font-size: 21px; letter-spacing: .07em; text-transform: uppercase; line-height: 1; color: #fff; }
+.tagline i { font-style: normal; font-size: 12.5px; font-weight: 600; letter-spacing: .05em; line-height: 1.2; color: var(--band-muted); }
 .brow { border-bottom: 1px solid var(--line); }
 .brow:last-child { border-bottom: 0; }
 .bhead { width: 100%; display: flex; align-items: center; gap: 12px; padding: 13px 18px; background: none; border: 0; cursor: pointer; text-align: left; flex-wrap: wrap; }
@@ -382,7 +389,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
 <body>
 <header class="top">
   <div class="inner">
-    <a class="logo" href="#/" aria-label="Oriental Motors, inicio"><img class="logo-img" id="logoImg" alt="Oriental Motors" hidden><span class="logo-txt"><b>Oriental Motors</b><span>Repuestos<br>Hyundai · Kia · Toyota</span></span></a>
+    <a class="logo" href="#/" aria-label="Oriental Motors, inicio"><img class="logo-img" id="logoImg" alt="Oriental Motors" hidden><span class="logo-txt"><b>Oriental Motors</b><span class="tagline"><em>Repuestos</em><i>Hyundai · Kia · Toyota</i></span></span></a>
     <div class="qbox">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
       <input id="q" type="search" placeholder="Busca por código, OEM, repuesto o vehículo" aria-label="Buscar" autocomplete="off">
