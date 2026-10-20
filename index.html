@@ -389,6 +389,162 @@ dialog.visor::backdrop { background: rgba(12, 6, 22, .7); }
 .wsp svg { flex: none; }
 @media (max-width: 640px) { .wsp .lbl { display: none; } .wsp { padding: 14px; } }
 dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(340px, 92vw); }
+
+/* ---------- v8: precio a consultar, calidades, videos, mantencion ---------- */
+:root { --tO: #522d83; --tO-soft: #efe9f7; --tP: #0b63a8; --tP-soft: #e3f0fa; --tE: #1f7a4f; --tE-soft: #e4f3eb; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --tO: #c3a6ef; --tO-soft: #2a2038; --tP: #6fb6ee; --tP-soft: #142a3b; --tE: #5ccf94; --tE-soft: #15301f; } }
+:root[data-theme="dark"] { --tO: #c3a6ef; --tO-soft: #2a2038; --tP: #6fb6ee; --tP-soft: #142a3b; --tE: #5ccf94; --tE-soft: #15301f; }
+.price.cons { font-size: 17px; color: var(--muted); font-family: var(--f-body); font-weight: 700; }
+.buy .price.cons { font-size: 26px; }
+.tier { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 700; letter-spacing: .02em; padding: 2px 8px 2px 6px; border-radius: 99px; white-space: nowrap; }
+.tier .lv { display: inline-flex; gap: 2px; align-items: flex-end; }
+.tier .lv i { width: 3px; border-radius: 2px; background: currentColor; opacity: .25; }
+.tier .lv i:nth-child(1) { height: 6px; } .tier .lv i:nth-child(2) { height: 9px; } .tier .lv i:nth-child(3) { height: 12px; }
+.tier .lv i.on { opacity: 1; }
+.tier.tO { color: var(--tO); background: var(--tO-soft); } .tier.tP { color: var(--tP); background: var(--tP-soft); } .tier.tE { color: var(--tE); background: var(--tE-soft); }
+.tier.lg { font-size: 14px; padding: 4px 12px 4px 9px; gap: 8px; }
+.tier.lg .lv i { width: 4px; } .tier.lg .lv i:nth-child(1) { height: 8px; } .tier.lg .lv i:nth-child(2) { height: 12px; } .tier.lg .lv i:nth-child(3) { height: 16px; }
+.vpill { position: absolute; right: 8px; top: 8px; display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; background: rgba(20, 8, 40, .78); color: #fff; padding: 3px 8px 3px 6px; border-radius: 99px; }
+.qhint { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--brand); background: var(--brand-soft); border: 0; border-radius: 99px; padding: 6px 12px; cursor: pointer; }
+.qhint:hover { text-decoration: underline; }
+
+/* elige tu calidad */
+.qwrap { padding: 16px 18px 18px; }
+.qintro { font-size: 13.5px; color: var(--muted); margin: 0 0 14px; }
+.qcols { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.qcol { position: relative; display: flex; flex-direction: column; border: 1px solid var(--line-2); border-radius: 14px; background: var(--surface); overflow: hidden; }
+.qcol::before { content: ""; height: 5px; background: var(--qc); }
+.qcol.tO { --qc: var(--tO); --qs: var(--tO-soft); } .qcol.tP { --qc: var(--tP); --qs: var(--tP-soft); } .qcol.tE { --qc: var(--tE); --qs: var(--tE-soft); }
+.qcol.cur { border-color: var(--qc); box-shadow: 0 0 0 2px var(--qc) inset, var(--shadow); }
+.qhd { padding: 12px 14px 10px; background: var(--qs); display: grid; gap: 4px; }
+.qhd small { font-size: 12.5px; color: var(--muted); line-height: 1.3; }
+.qrib { position: absolute; top: 14px; right: 12px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; background: var(--red); color: #fff; padding: 3px 8px; border-radius: 6px; }
+.qbody { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 12px; padding: 14px; align-items: start; }
+.qimg { width: 84px; height: 84px; border-radius: 10px; border: 1px solid var(--line); background: var(--photo); display: grid; place-items: center; overflow: hidden; color: #8a829c; }
+.qimg img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+.qimg.vacia { background: var(--ph); }
+.qinfo { display: grid; gap: 4px; min-width: 0; }
+.qinfo .tag { font-size: 11px; }
+.qinfo .qd { font-size: 13.5px; font-weight: 600; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.qinfo .qm { font-size: 12.5px; color: var(--muted); }
+.qprice { padding: 0 14px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.qprice .price { font-size: 30px; }
+.dif { font-size: 12.5px; font-weight: 700; padding: 2px 8px; border-radius: 99px; }
+.dif.menos { color: var(--ok); background: var(--ok-soft); }
+.dif.mas { color: var(--muted); background: var(--bg); }
+.qact { margin-top: auto; padding: 12px 14px 14px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.qact .btn { padding: 8px 14px; font-size: 13.5px; }
+.vs { font-size: 12.5px; font-weight: 700; color: var(--qc); display: inline-flex; align-items: center; gap: 5px; }
+.qmas { border-top: 1px dashed var(--line-2); margin: 0 14px 12px; }
+.qmas summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--brand); padding: 10px 0 4px; list-style: none; }
+.qmas summary::-webkit-details-marker { display: none; }
+.qmas a { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; font-size: 13px; text-decoration: none; border-bottom: 1px solid var(--line); }
+.qmas a:hover { color: var(--brand); }
+.qmas a span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.qmas a b { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* videos */
+.gal .big video { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+.vplay { position: absolute; left: 12px; bottom: 12px; z-index: 2; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; background: rgba(20, 8, 40, .82); color: #fff; border: 0; border-radius: 99px; padding: 7px 13px 7px 10px; cursor: pointer; }
+.vplay:hover { background: var(--red); }
+.gal .big { position: relative; }
+.thumbs .tv, .vthumbs .tv { position: relative; }
+.thumbs .tv::after, .vthumbs .tv::after { content: ""; position: absolute; inset: 0; background: rgba(20, 8, 40, .35) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") center / 26px no-repeat; }
+.vimg video { max-width: 100%; max-height: 100%; background: #fff; border-radius: 12px; }
+.reels { margin-top: 30px; }
+.reels h3 { font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: 24px; margin: 0; letter-spacing: .02em; }
+.reels .rsub { font-size: 13.5px; color: var(--muted); margin: 2px 0 12px; }
+.rstrip { display: grid; grid-auto-flow: column; grid-auto-columns: 168px; gap: 12px; overflow-x: auto; padding: 2px 2px 12px; scroll-snap-type: x proximity; }
+.reel { position: relative; aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow); scroll-snap-align: start; text-decoration: none; color: #fff; display: block; }
+.reel img, .reel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.reel .ro { position: absolute; inset: auto 0 0 0; padding: 34px 10px 10px; background: linear-gradient(transparent, rgba(20, 8, 40, .88)); display: grid; gap: 2px; }
+.reel .ro b { font-size: 13px; line-height: 1.2; }
+.reel .ro small { font-family: var(--f-mono); font-size: 10.5px; opacity: .8; }
+.reel .ro .price { font-size: 19px; color: #fff; }
+.reel .rp { position: absolute; top: 10px; left: 10px; width: 32px; height: 32px; border-radius: 99px; background: rgba(222, 22, 23, .92); display: grid; place-items: center; }
+
+/* entrada a mantencion */
+.mant-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--red); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 9px 14px; border-radius: 10px; white-space: nowrap; }
+.mant-btn:hover { background: var(--red-2); }
+.promo { display: flex; align-items: center; gap: 16px 22px; flex-wrap: wrap; background: linear-gradient(120deg, var(--band) 0%, var(--band-2) 70%); color: #fff; border-radius: 16px; padding: 16px 20px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 6px solid var(--red); }
+.promo .pi { width: 52px; height: 52px; border-radius: 14px; background: rgba(255, 255, 255, .12); display: grid; place-items: center; flex: none; }
+.promo .pt { flex: 1 1 300px; min-width: 0; }
+.promo .pt b { display: block; font-family: var(--f-display); font-weight: 700; font-size: 24px; text-transform: uppercase; letter-spacing: .02em; line-height: 1.05; }
+.promo .pt span { font-size: 14px; color: var(--band-muted); }
+.promo .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.promo .chip { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .25); color: #fff; }
+.promo .btn.pri { white-space: nowrap; }
+
+/* arma tu mantencion */
+.mhead { background: linear-gradient(120deg, var(--band) 0%, var(--band-2) 75%); color: #fff; border-radius: 18px; padding: 22px 24px; display: grid; gap: 14px; box-shadow: var(--shadow-up); border-bottom: 4px solid var(--red); }
+.mhead h1 { font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: clamp(30px, 4vw, 44px); line-height: .95; margin: 0; letter-spacing: .01em; }
+.mhead p { margin: 0; color: var(--band-muted); font-size: 15px; max-width: 640px; }
+.msteps { display: flex; gap: 8px 18px; flex-wrap: wrap; font-size: 13.5px; font-weight: 600; }
+.msteps span { display: inline-flex; align-items: center; gap: 8px; color: var(--band-muted); }
+.msteps span i { font-style: normal; width: 24px; height: 24px; border-radius: 99px; display: grid; place-items: center; background: rgba(255, 255, 255, .14); color: #fff; font-size: 12.5px; }
+.msteps span.ok { color: #fff; } .msteps span.ok i { background: var(--red); }
+.mveh { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.mveh .car-chip { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--band-2); font-weight: 700; padding: 7px 14px; border-radius: 99px; font-size: 14.5px; }
+.mveh .link { color: #fff; }
+.mgrid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 22px; align-items: start; margin-top: 20px; }
+.mtier { display: flex; align-items: center; gap: 10px 16px; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); padding: 12px 14px; margin-bottom: 14px; }
+.mtier > b { font-family: var(--f-display); text-transform: uppercase; font-size: 18px; letter-spacing: .03em; }
+.mtier .tsel { display: flex; gap: 6px; flex-wrap: wrap; flex: 1 1 520px; }
+.mtier .tsel button { flex: 1 1 180px; }
+.mtier .tsel button { border: 1px solid var(--line-2); background: var(--surface); border-radius: 12px; padding: 7px 12px; cursor: pointer; display: grid; gap: 2px; text-align: left; }
+.mtier .tsel button small { font-size: 11.5px; color: var(--muted); }
+.mtier .tsel button[aria-pressed="true"] { border-color: var(--brand); box-shadow: 0 0 0 2px var(--brand) inset; }
+.mtier .note { flex-basis: 100%; }
+.mline { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); margin-bottom: 12px; overflow: hidden; }
+.mline.off { opacity: .55; }
+.mlh { display: grid; grid-template-columns: auto 44px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 14px 16px; }
+.mchk { width: 22px; height: 22px; accent-color: var(--red); cursor: pointer; }
+.mico { width: 44px; height: 44px; border-radius: 12px; background: var(--brand-soft); color: var(--brand); display: grid; place-items: center; }
+.mlt b { display: block; font-family: var(--f-display); font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: .02em; line-height: 1.05; }
+.mlt small { font-size: 12.5px; color: var(--muted); }
+.mlp { text-align: right; display: grid; gap: 4px; justify-items: end; }
+.mlp .price { font-size: 24px; }
+.mpick { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 0 16px 14px 88px; }
+.mpick .qimg { width: 64px; height: 64px; }
+.mpick .qinfo a { text-decoration: none; }
+.mpick .qinfo a:hover .qd { color: var(--brand); text-decoration: underline; }
+.mpick .qty button { width: 30px; font-size: 16px; } .mpick .qty input { width: 34px; font-size: 14px; }
+.mopts { padding: 0 16px 14px 88px; }
+.mopts summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--brand); list-style: none; display: inline-flex; gap: 6px; align-items: center; }
+.mopts summary::-webkit-details-marker { display: none; }
+.mopts[open] summary .car { transform: rotate(90deg); }
+.olist { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; margin-top: 10px; }
+.opt2 { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 8px; align-items: center; text-align: left; border: 1px solid var(--line-2); border-radius: 12px; padding: 8px; background: var(--surface); cursor: pointer; }
+.opt2:hover { border-color: var(--brand); }
+.opt2[aria-pressed="true"] { border-color: var(--red); box-shadow: 0 0 0 2px var(--red) inset; }
+.opt2 .qimg { width: 44px; height: 44px; border-radius: 8px; }
+.opt2 span { display: grid; gap: 3px; min-width: 0; font-size: 12.5px; }
+.opt2 span b { font-variant-numeric: tabular-nums; font-size: 14px; }
+.opt2 em { font-style: normal; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mnone { padding: 0 16px 14px 88px; font-size: 13.5px; color: var(--muted); }
+.mwarn { font-size: 12.5px; color: var(--warn); background: var(--warn-soft); border-radius: 8px; padding: 4px 8px; justify-self: start; }
+.msum { position: sticky; top: 96px; grid-template-columns: minmax(0, 1fr); }
+.msum .btn { white-space: normal; }
+.opt2 span .tier { justify-self: start; }
+#calidades { scroll-margin-top: 110px; }
+.msum .ml { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+.msum .ml span { color: var(--muted); }
+.msum .ml b { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mrem { display: flex; gap: 8px; }
+.mrem input { flex: 1; min-width: 0; font: inherit; padding: 9px 11px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--bg); color: var(--ink); }
+.mpick-car { display: grid; gap: 12px; margin-top: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); padding: 18px 20px; }
+.mpick-car h3 { margin: 0; font-family: var(--f-display); text-transform: uppercase; font-size: 22px; }
+.mpick-car .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+@media (max-width: 900px) { .mgrid { grid-template-columns: 1fr; } .msum { position: static; } .veh .mant-btn { flex-basis: 100%; justify-content: center; } }
+@media (max-width: 640px) {
+  .mlh { grid-template-columns: auto 36px minmax(0, 1fr); padding: 12px; gap: 10px; }
+  .mico { width: 36px; height: 36px; } .mlp { grid-column: 1 / -1; justify-items: start; text-align: left; padding-left: 68px; }
+  .mpick, .mopts, .mnone { padding-left: 12px; padding-right: 12px; }
+  .mpick { grid-template-columns: 56px minmax(0, 1fr); } .mpick .qty { grid-column: 2; justify-self: start; }
+  .qbody { grid-template-columns: 64px minmax(0, 1fr); } .qimg { width: 64px; height: 64px; }
+  .rstrip { grid-auto-columns: 140px; }
+  .promo .pt b { font-size: 21px; }
+}
 </style>
 </head>
 <body>
@@ -422,6 +578,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
       <label><span>Año</span><select id="vAnio"></select></label>
     </div>
     <div class="vacts" id="vacts"></div>
+    <a class="mant-btn" href="#/mantencion"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>Arma tu mantención</a>
   </div>
 </section>
 
@@ -439,7 +596,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
   <span class="lbl">WhatsApp</span>
 </button>
 
-<script src="datos.js?v=202610191539"></script>
+<script src="datos.js?v=202610201709"></script>
 <script>
 (function () {
   "use strict";
@@ -465,8 +622,29 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     grid: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>',
     rows: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="4" width="18" height="4" rx="1.5"/><rect x="3" y="10" width="18" height="4" rx="1.5"/><rect x="3" y="16" width="18" height="4" rx="1.5"/></svg>',
     photo: '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.2"/></svg>',
-    fil: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>'
+    fil: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>',
+    play: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
+    wrench: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>',
+    oil: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="15" rx="3"/><path d="M9 6V3h6v3M6 11h12M6 16h12"/></svg>',
+    air: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 6v12M11 6v12M15 6v12M19 6v12"/></svg>',
+    cabin: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7"/></svg>',
+    fuel: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>',
+    plug: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M9 6h6v5H9zM10 11v4h4v-4M11 15l-1 3 2 4 2-4-1-3"/></svg>'
   };
+  const precio = (i, big) => i.pr > 0 ? `<span class="price">${clp(i.pr)}</span>` : `<span class="price cons">${big ? "Consultar precio" : "Consultar"}</span>`;
+  const TIER = {
+    O: { n: "Original", d: "Repuesto de la marca del vehículo (genuino)", lv: 3 },
+    P: { n: "Premium", d: "Marca reconocida u origen Japón, Corea o Europa", lv: 2 },
+    E: { n: "Económica", d: "Calidad de reposición al mejor precio", lv: 1 }
+  };
+  const TORD = ["O", "P", "E"];
+  const tierHTML = (q, lg) => { const t = TIER[q] || TIER.E; return `<span class="tier t${q || "E"}${lg ? " lg" : ""}" title="${esc(t.d)}"><span class="lv">${[1, 2, 3].map(k => `<i${k <= t.lv ? ' class="on"' : ""}></i>`).join("")}</span>${t.n}</span>`; };
+  // otras calidades del mismo repuesto (grupo de homologos)
+  const GRP = new Map();
+  ITEMS.forEach(i => { if (i.h) { if (!GRP.has(i.h)) GRP.set(i.h, []); GRP.get(i.h).push(i); } });
+  const otras = i => (i.h && GRP.get(i.h)) || [i];
+  const media = i => (i.i || []).map(s => ({ t: "img", s })).concat(i.v ? [{ t: "vid", s: i.v, p: i.vp || (i.i || [])[0] || "" }] : []);
+  const thumbImg = i => { const s = (i.i || [])[0] || i.vp; return s ? `<span class="qimg"><img src="${esc(s)}" alt="" loading="lazy"></span>` : `<span class="qimg vacia">${ICON.photo}</span>`; };
 
   // texto de busqueda precalculado
   ITEMS.forEach(i => {
@@ -489,6 +667,8 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     return toks.every(t => i._h.includes(t));
   };
   const fitsFam = (i, f, s) => (!f || i.f === f) && (!s || i.s === s);
+  // x = entro solo como otra calidad o para el kit, sin foto: no se lista (salvo busqueda por su codigo)
+  const listable = (i, q) => !i.x || (q && norm(q).replace(/[\s\-.]/g, "").length >= 5 && i._hc.includes(norm(q).replace(/[\s\-.]/g, "")));
   const curVeh = () => ({ marca: S.marca, modelo: S.modelo, motor: S.motor, anio: S.anio });
 
   // ---------------- selects de vehiculo en cascada (se alimentan del resto de filtros)
@@ -526,7 +706,8 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     sel.innerHTML = `<option value="">${ph}</option>` + ks.map(k => `<option value="${esc(k)}"${String(k) === String(val) ? " selected" : ""}>${esc(label ? label(k) : k)} (${map.get(k) || 0})</option>`).join("");
   }
   function renderVeh() {
-    const base = ITEMS.filter(i => fitsQ(i, S.q) && fitsFam(i, S.fam, S.sub));
+    const enKit = location.hash.startsWith("#/mantencion");
+    const base = ITEMS.filter(i => (enKit ? esKit(i) : listable(i, S.q) && fitsQ(i, S.q) && fitsFam(i, S.fam, S.sub)));
     const c = vehOptions(base, curVeh());
     fillSelect($("#vMarca"), "Todas las marcas", c.marca, S.marca, ordenMarca, cap);
     fillSelect($("#vModelo"), S.marca ? "Todos los modelos" : "Elige marca", c.modelo, S.modelo, (a, b) => a.localeCompare(b, "es", { numeric: true }));
@@ -559,7 +740,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
   function famCounts() {
     const v = curVeh(), f = new Map(), s = new Map();
     for (const i of ITEMS) {
-      if (!fitsQ(i, S.q) || !fitsVeh(i, v)) continue;
+      if (!listable(i, S.q) || !fitsQ(i, S.q) || !fitsVeh(i, v)) continue;
       f.set(i.f, (f.get(i.f) || 0) + 1);
       s.set(i.f + "|" + i.s, (s.get(i.f + "|" + i.s) || 0) + 1);
     }
@@ -617,13 +798,13 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     const img = i.i && i.i[0];
     return `<article class="card">
       <a class="cover" href="#/p/${encodeURIComponent(i.c)}" aria-label="${esc(i.d)}"></a>
-      <div class="ph${img ? "" : " vacia"}"${i.i.length > 1 ? ` data-ph="${esc(i.c)}"` : ""}>${img ? `<img src="${esc(img)}" alt="" loading="lazy" decoding="async">` : ICON.photo + "<small>Sin foto</small>"}${opts.sub ? `<span class="sf">${esc(i.s)}</span>` : ""}${i.i.length > 1 ? `<span class="pdots" aria-hidden="true">${i.i.map((f, k) => `<i${k ? "" : ' class="on"'}></i>`).join("")}</span>` : ""}</div>
+      <div class="ph${img ? "" : " vacia"}"${i.i.length > 1 ? ` data-ph="${esc(i.c)}"` : ""}>${img ? `<img src="${esc(img)}" alt="" loading="lazy" decoding="async">` : ICON.photo + "<small>Sin foto</small>"}${opts.sub ? `<span class="sf">${esc(i.s)}</span>` : ""}${i.v ? `<span class="vpill">${ICON.play}Video</span>` : ""}${i.i.length > 1 ? `<span class="pdots" aria-hidden="true">${i.i.map((f, k) => `<i${k ? "" : ' class="on"'}></i>`).join("")}</span>` : ""}</div>
       <div class="cb">
         <span class="tag">${esc(i.c)}</span>
         <div class="cd">${esc(i.d)}</div>
-        <div class="cm">${i.m ? `<span>${esc(i.m)}</span>` : ""}${i.p ? `<span>${esc(cap(i.p))}</span>` : ""}</div>
+        <div class="cm">${tierHTML(i.q)}${i.m ? `<span>${esc(i.m)}</span>` : ""}${i.p ? `<span>${esc(cap(i.p))}</span>` : ""}</div>
         ${aplMini(i)}${fitBadge(i)}
-        <div class="cf"><span class="price">${clp(i.pr)}</span><button class="add" type="button" data-add="${esc(i.c)}">${ICON.cart}<span class="lbl">Agregar</span></button></div>
+        <div class="cf">${precio(i)}<button class="add" type="button" data-add="${esc(i.c)}">${ICON.cart}<span class="lbl">Agregar</span></button></div>
       </div></article>`;
   }
 
@@ -657,7 +838,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     const mods = new Set((base.a || []).map(a => a[0] + "|" + a[1]));
     const cand = [];
     for (const i of ITEMS) {
-      if (i.f !== fam || subs.has(i.s) || i.c === base.c) continue;
+      if (i.f !== fam || subs.has(i.s) || i.c === base.c || i.x) continue;
       if (sel && !fitsVeh(i, v)) continue;
       let comp = 0;
       for (const a of (i.a || [])) if (mods.has(a[0] + "|" + a[1])) comp++;
@@ -685,7 +866,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
   // ---------------- vista catalogo
   function filtrados() {
     const v = curVeh();
-    let l = ITEMS.filter(i => fitsQ(i, S.q) && fitsFam(i, S.fam, S.sub) && fitsVeh(i, v));
+    let l = ITEMS.filter(i => listable(i, S.q) && fitsQ(i, S.q) && fitsFam(i, S.fam, S.sub) && fitsVeh(i, v));
     if (S.orden === "rel") l.sort((a, b) => (!!b.i.length - !!a.i.length) || (Math.min(b.a.length, 6) - Math.min(a.a.length, 6)) || a.d.localeCompare(b.d, "es"));
     else if (S.orden === "az") l.sort((a, b) => a.d.localeCompare(b.d, "es"));
     else if (S.orden === "cod") l.sort((a, b) => a.c.localeCompare(b.c));
@@ -741,7 +922,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     if (veh) chips.push(`<button class="chip on" type="button" data-x="veh">${esc(veh)} <span class="x">×</span></button>`);
     if (S.fam) chips.push(`<button class="chip on" type="button" data-x="fam">${esc(S.sub ? S.fam + " › " + S.sub : S.fam)} <span class="x">×</span></button>`);
     const portada = !S.q && !S.fam && !vehOn(v);
-    let h = (portada ? heroHTML() : "") + `<div class="layout"><aside class="side" id="side" aria-label="Categorías">${treeHTML()}</aside><section aria-live="polite">
+    let h = (portada ? heroHTML() + promoHTML() : "") + `<div class="layout"><aside class="side" id="side" aria-label="Categorías">${treeHTML()}</aside><section aria-live="polite">
       <div class="tools"><div>
         <div class="crumbs"><button type="button" data-crumb="">Inicio</button>${S.fam ? ` › <button type="button" data-crumb="f">${esc(S.fam)}</button>` : ""}${S.sub ? ` › <b>${esc(S.sub)}</b>` : ""}</div>
         <div class="ttl">${esc(titulo)}</div>
@@ -763,6 +944,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
       const base = { c: "", f: S.fam, s: S.sub, a: l.flatMap(i => i.a || []).slice(0, 4000) };
       h += relHTML("Podría interesarte", `Otros repuestos de <b>${esc(S.fam)}</b>${veh ? ` para tu ${esc(veh)}` : " para los mismos vehículos"}`, relacionados(base, 16));
     }
+    if (portada) h += reelsHTML();
     h += `</section></div>`;
     $("#app").innerHTML = h;
     $("#orden").value = S.orden;
@@ -778,11 +960,42 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     document.querySelectorAll("[data-crumb]").forEach(b => b.onclick = () => { if (!b.dataset.crumb) { inicio(); return; } S.sub = ""; S.lim = PAGE; refresh(); });
     bindTree($("#side"));
     bindComun($("#app"));
-    if (portada) bindHero(); else clearInterval(heroTimer);
+    if (portada) { bindHero(); bindReels(); } else clearInterval(heroTimer);
   }
 
   // ---------------- ficha de producto
-  function renderProducto(cod) {
+  // ---------------- elige tu calidad (homologos que compiten en la misma ficha)
+  function calidadesHTML(i) {
+    const g = otras(i);
+    if (g.length < 2) return "";
+    const por = new Map(TORD.map(q => [q, []]));
+    g.forEach(x => por.get(TIER[x.q] ? x.q : "E").push(x));
+    const conPrecio = g.filter(x => x.pr > 0);
+    const barato = conPrecio.length > 1 ? conPrecio.reduce((a, b) => (b.pr < a.pr ? b : a)) : null;
+    const cols = TORD.filter(q => por.get(q).length).map(q => {
+      const l = por.get(q).sort((a, b) => (b === i) - (a === i) || (b.pr > 0) - (a.pr > 0) || a.pr - b.pr || !!b.i.length - !!a.i.length);
+      const x = l[0], cur = x === i;
+      let dif = "";
+      if (!cur && x.pr > 0 && i.pr > 0) {
+        const d = x.pr - i.pr, pc = Math.round(Math.abs(d) / i.pr * 100);
+        dif = d < 0 ? `<span class="dif menos">Ahorras ${clp(-d)} (${pc}%)</span>` : d > 0 ? `<span class="dif mas">+${clp(d)} (${pc}%)</span>` : `<span class="dif mas">Mismo precio</span>`;
+      }
+      const mas = l.slice(1);
+      return `<div class="qcol t${q}${cur ? " cur" : ""}">${x === barato ? `<span class="qrib">Mejor precio</span>` : ""}
+        <div class="qhd">${tierHTML(q, true)}<small>${esc(TIER[q].d)}</small></div>
+        <div class="qbody">${cur ? thumbImg(x) : `<a href="#/p/${encodeURIComponent(x.c)}" aria-label="Ver ${esc(x.d)}">${thumbImg(x)}</a>`}
+          <div class="qinfo"><span class="tag">${esc(x.c)}</span><div class="qd">${esc(x.d)}</div><div class="qm">${[x.m, cap(x.p)].filter(Boolean).map(esc).join(" · ") || "&nbsp;"}</div></div></div>
+        <div class="qprice">${precio(x)}${dif}</div>
+        <div class="qact">${cur ? `<span class="vs">${ICON.ok} Estás viendo esta</span>` : `<a class="btn" href="#/p/${encodeURIComponent(x.c)}">Ver ficha</a><button class="add" type="button" data-add="${esc(x.c)}">${ICON.cart}<span class="lbl">Agregar</span></button>`}</div>
+        ${mas.length ? `<details class="qmas"><summary>${mas.length} opción${mas.length === 1 ? "" : "es"} más en ${TIER[q].n}</summary>${mas.map(y => `<a href="#/p/${encodeURIComponent(y.c)}"><span>${esc(y.c)} · ${esc(y.m || "Sin marca")}</span><b>${y.pr > 0 ? clp(y.pr) : "Consultar"}</b></a>`).join("")}</details>` : ""}
+      </div>`;
+    });
+    const n = cols.length;
+    return `<section class="sec2" id="calidades" aria-label="Elige tu calidad"><h2>Elige tu calidad <small>${g.length} opciones para este mismo repuesto${n > 1 ? ` en ${n} calidades` : ""}</small></h2>
+      <div class="qwrap"><p class="qintro">Mismo repuesto, misma medida y aplicación: tú eliges entre la pieza original, una marca premium o la alternativa económica.</p><div class="qcols">${cols.join("")}</div></div></section>`;
+  }
+
+  function renderProducto(cod, conVideo) {
     const i = BY.get(cod);
     if (!i) { $("#app").innerHTML = `<div class="empty"><b>No encontramos el código ${esc(cod)}</b><a class="link" href="#/">Volver al catálogo</a></div>`; return; }
     const v = curVeh();
@@ -791,7 +1004,13 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     if (veh) compat = fitsVeh(i, v) ? `<div class="compat ok">${ICON.ok}<div><b>Compatible con tu ${esc(veh)}</b>Según las aplicaciones cargadas.</div></div>`
       : `<div class="compat no"><div><b>No confirmado para tu ${esc(veh)}</b>Revisa las aplicaciones o consúltanos con tu patente.</div></div>`;
     else if ((i.a || []).length) compat = `<div class="compat nv"><div><b>¿Le sirve a tu auto?</b>Elige tu vehículo arriba y te decimos si es compatible.</div></div>`;
-    const fotos = i.i.length ? i.i : [null];
+    const MED = media(i);
+    const bigHTML = m => !m ? ICON.photo : m.t === "vid"
+      ? `<video src="${esc(m.s)}"${m.p ? ` poster="${esc(m.p)}"` : ""} controls autoplay muted loop playsinline preload="metadata"></video>`
+      : `<img src="${esc(m.s)}" alt="${esc(i.d)}">`;
+    let fAct = conVideo && i.v ? MED.length - 1 : 0;
+    const grupo = otras(i), qs = [...new Set(grupo.map(x => x.q))];
+    const desde = grupo.filter(x => x.pr > 0).reduce((a, x) => Math.min(a, x.pr), Infinity);
     const spec = [["Código (SKU)", `<span class="mono">${esc(i.c)}</span>`]];
     if (i.m) spec.push(["Marca", esc(i.m)]);
     if (i.p) spec.push(["Origen", esc(cap(i.p))]);
@@ -835,20 +1054,22 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
       <div class="crumbs back"><button type="button" data-back>‹ Volver</button> · <button type="button" data-crumbf="${esc(i.f)}">${esc(i.f)}</button> › <button type="button" data-crumbf="${esc(i.f)}" data-crumbs="${esc(i.s)}">${esc(i.s)}</button></div>
       <div class="pd">
         <div class="gal">
-          <div class="big" id="big" role="button" tabindex="0" title="Ver en grande" aria-label="Ver fotos en grande">${fotos[0] ? `<img src="${esc(fotos[0])}" alt="${esc(i.d)}">` : ICON.photo}</div>
-          ${i.i.length > 1 ? `<div class="thumbs">${i.i.map((f, k) => `<button type="button" data-ft="${k}" aria-current="${k === 0}" aria-label="Foto ${k + 1}"><img src="${esc(f)}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
+          <div class="big" id="big" role="button" tabindex="0" title="Ver en grande" aria-label="Ver fotos en grande">${bigHTML(MED[fAct])}</div>
+          ${MED.length > 1 ? `<div class="thumbs">${MED.map((m, k) => `<button type="button" data-ft="${k}"${m.t === "vid" ? ' class="tv"' : ""} aria-current="${k === fAct}" aria-label="${m.t === "vid" ? "Video" : "Foto " + (k + 1)}">${m.t === "vid" && !m.p ? ICON.play : `<img src="${esc(m.t === "vid" ? m.p : m.s)}" alt="" loading="lazy">`}</button>`).join("")}</div>` : ""}
         </div>
         <div class="box">
           <div><span class="tag">${esc(i.c)}</span></div>
           <h1>${esc(i.d)}</h1>
           ${compat}
           <div class="buy">
-            <span class="price">${clp(i.pr)}</span>
-            <span class="pnote">Precio referencial de la maqueta · IVA y despacho por definir</span>
+            ${precio(i, true)}${tierHTML(i.q, true)}
+            <span class="pnote">${i.pr > 0 ? "Precio detalle referencial · despacho por definir" : "Te confirmamos el precio por WhatsApp o en tienda"}</span>
+            ${grupo.length > 1 ? `<button class="qhint" type="button" id="bQ">Disponible en ${qs.length > 1 ? qs.length + " calidades" : grupo.length + " opciones"}${desde < Infinity ? ` · desde ${clp(desde)}` : ""} ↓</button>` : ""}
             <div class="qty"><button type="button" data-q="-1" aria-label="Menos">−</button><input id="qn" type="number" min="1" value="1" aria-label="Cantidad"><button type="button" data-q="1" aria-label="Más">+</button></div>
             <button class="add" type="button" id="bAdd">${ICON.cart} Agregar al carrito</button>
             ${enCarro ? `<span class="note">Ya tienes ${enCarro} en el carrito</span>` : ""}
           </div>
+          ${esKit(i) ? `<a class="link" href="#/mantencion" id="bKit" style="justify-self:start">${ICON.wrench.replace('width="26" height="26"', 'width="16" height="16" style="vertical-align:-3px"')} Arma tu mantención completa con este repuesto</a>` : ""}
           <table class="spec"><tbody>
             ${rows(spec)}
             ${tec.length ? `<tr class="grp"><th colspan="2">Dato técnico</th></tr>${rows(tec)}` : ""}
@@ -856,6 +1077,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
           </tbody></table>
         </div>
       </div>
+      ${calidadesHTML(i)}
       <section class="sec2" aria-label="Aplicaciones"><h2>Aplicaciones <small>${marcas.length ? `${(i.a || []).length} versiones · toca una marca para ver sus modelos` : ""}</small></h2>${aplH}</section>
       <section class="sec2" aria-label="Referencias OEM"><h2>Referencias OEM <small>${oem.length ? oem.length + " número" + (oem.length === 1 ? "" : "s") + " de parte" : ""}</small></h2>${oemH}</section>
       ${relHTML("Podría interesarte", `Más de <b>${esc(i.f)}</b>${vehOn(v) ? ` para tu ${esc(veh)}` : " para los mismos vehículos"}`, r)}`;
@@ -876,18 +1098,22 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
       document.querySelectorAll("#oemL .oem").forEach((x, k) => { if (k >= OEMV) x.hidden = o; });
       b.setAttribute("aria-expanded", !o); b.firstChild.textContent = o ? `Ver todas las referencias (${oem.length}) ` : "Ver menos ";
     });
-    let fAct = 0;
     const big = $("#big");
-    if (i.i.length) {
-      big.classList.add("zoom");
-      big.onclick = () => abrirVisor(i, fAct);
-      big.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrirVisor(i, fAct); } };
+    const pintaBig = k => {
+      fAct = k; big.innerHTML = bigHTML(MED[k]);
+      if (i.v && MED[k].t !== "vid") big.insertAdjacentHTML("beforeend", `<button class="vplay" type="button" id="bVid">${ICON.play} Ver video</button>`);
+      $("#bVid") && ($("#bVid").onclick = e => { e.stopPropagation(); pintaBig(MED.length - 1); });
+      big.classList.toggle("zoom", MED[k].t === "img");
+      document.querySelectorAll("[data-ft]").forEach(x => x.setAttribute("aria-current", +x.dataset.ft === k));
+    };
+    if (MED.length) {
+      pintaBig(fAct);
+      big.onclick = e => { if (MED[fAct].t === "img" && !e.target.closest("video")) abrirVisor(i, fAct); };
+      big.onkeydown = e => { if ((e.key === "Enter" || e.key === " ") && MED[fAct].t === "img") { e.preventDefault(); abrirVisor(i, fAct); } };
     }
-    document.querySelectorAll("[data-ft]").forEach(b => b.onclick = () => {
-      fAct = +b.dataset.ft;
-      big.innerHTML = `<img src="${esc(i.i[fAct])}" alt="${esc(i.d)}">`;
-      document.querySelectorAll("[data-ft]").forEach(x => x.setAttribute("aria-current", x === b));
-    });
+    document.querySelectorAll("[data-ft]").forEach(b => b.onclick = () => pintaBig(+b.dataset.ft));
+    $("#bKit") && ($("#bKit").onclick = () => { const l = KIT.find(k => k.f(i)); KS.veh = vehKey(curVeh()); KS.pick[l.k] = i.c; KS.off[l.k] = false; });
+    $("#bQ") && ($("#bQ").onclick = () => $("#calidades").scrollIntoView({ behavior: "smooth", block: "start" }));
     document.querySelectorAll("[data-q]").forEach(b => b.onclick = () => { const n = $("#qn"); n.value = Math.max(1, (+n.value || 1) + +b.dataset.q); });
     $("#bAdd").onclick = () => addCarro(i.c, Math.max(1, +$("#qn").value || 1));
     $("[data-back]").onclick = () => history.length > 1 ? history.back() : go("#/");
@@ -901,12 +1127,13 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
 
   // ---------------- visor de fotos en grande
   function abrirVisor(i, k) {
-    const d = $("#dFoto"), n = i.i.length;
+    const d = $("#dFoto"), M = media(i), n = M.length;
+    const ver = m => m.t === "vid" ? `<video src="${esc(m.s)}"${m.p ? ` poster="${esc(m.p)}"` : ""} controls autoplay muted loop playsinline></video>` : `<img src="${esc(m.s)}" alt="${esc(i.d)}">`;
     function pinta() {
       d.innerHTML = `<div class="vw">
         <div class="vh"><span class="tag">${esc(i.c)}</span><span class="vt">${esc(i.d)}</span><span class="vn">${k + 1} / ${n}</span><button class="xbtn" type="button" data-close>Cerrar ✕</button></div>
-        <div class="vimg">${n > 1 ? `<button class="vnav prev" type="button" aria-label="Foto anterior">‹</button>` : ""}<img src="${esc(i.i[k])}" alt="${esc(i.d)}">${n > 1 ? `<button class="vnav next" type="button" aria-label="Foto siguiente">›</button>` : ""}</div>
-        ${n > 1 ? `<div class="vthumbs">${i.i.map((f, j) => `<button type="button" data-vj="${j}" aria-current="${j === k}"><img src="${esc(f)}" alt="Foto ${j + 1}"></button>`).join("")}</div>` : ""}</div>`;
+        <div class="vimg">${n > 1 ? `<button class="vnav prev" type="button" aria-label="Foto anterior">‹</button>` : ""}${ver(M[k])}${n > 1 ? `<button class="vnav next" type="button" aria-label="Foto siguiente">›</button>` : ""}</div>
+        ${n > 1 ? `<div class="vthumbs">${M.map((m, j) => `<button type="button" data-vj="${j}"${m.t === "vid" ? ' class="tv"' : ""} aria-current="${j === k}">${m.t === "vid" && !m.p ? ICON.play : `<img src="${esc(m.t === "vid" ? m.p : m.s)}" alt="${m.t === "vid" ? "Video" : "Foto " + (j + 1)}">`}</button>`).join("")}</div>` : ""}</div>`;
       d.querySelector("[data-close]").onclick = () => d.close();
       d.querySelector(".prev") && (d.querySelector(".prev").onclick = () => { k = (k - 1 + n) % n; pinta(); });
       d.querySelector(".next") && (d.querySelector(".next").onclick = () => { k = (k + 1) % n; pinta(); });
@@ -916,6 +1143,137 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     d.onclick = e => { if (e.target === d || e.target.classList.contains("vimg")) d.close(); };
     pinta();
     if (!d.open) d.showModal();
+  }
+
+  // ---------------- arma tu mantencion (maqueta: arma el kit con lo que hay cargado para el vehiculo)
+  const KIT = [
+    { k: "aceite", n: "Filtro de aceite", d: "Se cambia junto con el aceite", ico: "oil", f: i => i.s === "Filtro aceite", cant: 1 },
+    { k: "aire", n: "Filtro de aire", d: "Aire que entra al motor", ico: "air", f: i => i.s === "Filtro aire", cant: 1 },
+    { k: "polen", n: "Filtro de polen", d: "Cabina / aire acondicionado", ico: "cabin", f: i => i.s === "Filtro polen", cant: 1 },
+    { k: "comb", n: "Filtro de combustible", d: "Bencina o diésel según tu motor", ico: "fuel", f: i => i.s === "Filtro combustible", cant: 1 },
+    { k: "bujia", n: "Bujías", d: "Solo motores bencina · una por cilindro", ico: "plug", f: i => i.s === "Encendido" && /BUJIA/.test(norm(i.d)), cant: 4, bencina: true }
+  ];
+  const NO_KIT = /\b(PORTA|TAPA|SOPORTE|CAJA|CARCASA|BASE|ABRAZADERA|LLAVE|EMPAQUE|SELLO|ORING|O-RING)\b/;
+  KIT.forEach(l => { const f = l.f; l.f = i => f(i) && !NO_KIT.test(norm(i.d)); });
+  const esKit = i => KIT.some(l => l.f(i));
+  const KS = { tier: "P", off: {}, pick: {}, cant: {}, veh: "" };
+  const vehKey = v => [v.marca, v.modelo, v.motor, v.anio].join("|");
+  function combustibles(v) {
+    const s = new Set();
+    for (const i of ITEMS) for (const a of (i.a || [])) if (a[4] && appMatch(a, v)) s.add(norm(a[4]));
+    return s;
+  }
+  function elegirKit(ops, tier) {
+    const rank = q => Math.abs(TORD.indexOf(TIER[q] ? q : "E") - TORD.indexOf(tier));
+    return ops.slice().sort((a, b) => rank(a.q) - rank(b.q) || (b.pr > 0) - (a.pr > 0) || !!b.i.length - !!a.i.length || a.pr - b.pr)[0];
+  }
+  function lineasKit(v) {
+    const fuels = combustibles(v), diesel = fuels.size > 0 && [...fuels].every(f => f.includes("DIESEL"));
+    return KIT.map(l => {
+      if (l.bencina && diesel) return { l, sin: "diesel", ops: [] };
+      const ops = ITEMS.filter(i => l.f(i) && (i.a || []).length && fitsVeh(i, v));
+      const pick = (KS.pick[l.k] && ops.find(x => x.c === KS.pick[l.k])) || elegirKit(ops, KS.tier);
+      return { l, ops, pick, cant: KS.cant[l.k] || l.cant, on: !!pick && !KS.off[l.k] };
+    });
+  }
+  function renderMantencion(keep) {
+    const v = curVeh();
+    if (KS.veh !== vehKey(v)) { KS.pick = {}; KS.cant = {}; KS.off = {}; KS.veh = vehKey(v); }
+    const listo = !!(v.marca && v.modelo);
+    const lbl = listo ? vehOptions(ITEMS.filter(esKit), v).motorLbl : (m => m);
+    const vehTxt = [cap(v.marca), v.modelo, v.motor ? lbl(v.motor) : "", v.anio].filter(Boolean).join(" ");
+    let h = `<div class="crumbs back"><button type="button" data-crumb="">‹ Inicio</button></div>
+      <section class="mhead"><h1>Arma tu mantención</h1>
+        <p>Te armamos el kit de filtros y bujías que calza con tu auto. Eliges la calidad, revisas cada pieza y lo agregas al carrito de una vez.</p>
+        <div class="msteps"><span class="${listo ? "ok" : ""}"><i>1</i>Tu vehículo</span><span class="${listo ? "ok" : ""}"><i>2</i>Calidad del kit</span><span><i>3</i>Agregar al carrito</span></div>
+        ${listo ? `<div class="mveh"><span class="car-chip">${esc(vehTxt)}</span>${!v.motor ? `<span style="font-size:13px;color:var(--band-muted)">Elige el motor arriba para afinar el kit</span>` : ""}<button class="link" type="button" id="mCambia">Cambiar vehículo</button></div>` : ""}
+      </section>`;
+    if (!listo) {
+      const cnt = new Map();
+      for (const i of ITEMS) if (esKit(i)) for (const k of new Set((i.a || []).filter(a => ORDEN_MARCA.includes(a[0])).map(a => a[0] + "|" + a[1]))) cnt.set(k, (cnt.get(k) || 0) + 1);
+      const top = [...cnt.entries()].sort((a, b) => b[1] - a[1]).slice(0, 14);
+      const m = preferido();
+      h += `<div class="mpick-car"><h3>¿Para qué auto es?</h3>
+        <div class="note">Elige marca y modelo en <b>Tu vehículo</b> (arriba) o parte por uno de los más buscados:</div>
+        <div class="chips">${m ? `<button class="chip mine on" type="button" id="mMi">${ICON.ok} Mi auto: ${esc(autoTxt(m))}</button>` : ""}${top.map(([k]) => { const [ma, mo] = k.split("|"); return `<button class="chip" type="button" data-mv="${esc(k)}">${esc(cap(ma))} ${esc(mo)}</button>`; }).join("")}</div></div>`;
+      $("#app").innerHTML = h;
+      document.querySelectorAll("[data-mv]").forEach(b => b.onclick = () => { const [ma, mo] = b.dataset.mv.split("|"); setVeh({ marca: ma, modelo: mo }); });
+      $("#mMi") && ($("#mMi").onclick = () => usarAuto(preferido()));
+      $("[data-crumb]").onclick = inicio;
+      return;
+    }
+    const L = lineasKit(v);
+    const fuels = combustibles(v);
+    const mixto = !v.motor && fuels.size > 1;
+    const sel = L.filter(x => x.on);
+    const tot = sel.reduce((a, x) => a + (x.pick.pr > 0 ? x.pick.pr * x.cant : 0), 0);
+    const nCons = sel.filter(x => !(x.pick.pr > 0)).length;
+    const opt = (x, l) => `<button class="opt2" type="button" data-pk="${l.k}" data-c="${esc(x.c)}" aria-pressed="${x === L.find(y => y.l === l).pick}">${thumbImg(x)}<span>${tierHTML(x.q)}<b>${x.pr > 0 ? clp(x.pr) : "Consultar"}</b><em>${esc([x.m, x.c].filter(Boolean).join(" · "))}</em></span></button>`;
+    h += `<div class="mgrid"><div>
+      <div class="mtier"><b>Calidad del kit</b><div class="tsel" role="group" aria-label="Calidad del kit">${TORD.map(q => `<button type="button" data-tier="${q}" aria-pressed="${KS.tier === q}">${tierHTML(q)}<small>${esc(TIER[q].d)}</small></button>`).join("")}</div>
+        <span class="note">Elegimos la pieza de esa calidad para cada línea; si no hay, te proponemos la más cercana. Puedes cambiar cada una.</span></div>
+      ${mixto ? `<div class="warnbar" style="margin-bottom:12px">Tu ${esc(cap(v.marca))} ${esc(v.modelo)} tiene versiones bencina y diésel: elige el motor en <b>Tu vehículo</b> para que el kit sea exacto.</div>` : ""}
+      ${L.map(x => {
+        const l = x.l;
+        if (x.sin === "diesel") return `<div class="mline off"><div class="mlh"><input class="mchk" type="checkbox" disabled aria-label="${esc(l.n)}"><span class="mico">${ICON[l.ico]}</span><div class="mlt"><b>${esc(l.n)}</b><small>Tu motor es diésel: no usa bujías</small></div></div></div>`;
+        if (!x.pick) return `<div class="mline off"><div class="mlh"><input class="mchk" type="checkbox" disabled aria-label="${esc(l.n)}"><span class="mico">${ICON[l.ico]}</span><div class="mlt"><b>${esc(l.n)}</b><small>${esc(l.d)}</small></div></div><div class="mnone">Aún no tenemos este repuesto cargado para tu vehículo. <button class="link" type="button" data-wsp>Consúltanos</button></div></div>`;
+        const p = x.pick, distinta = p.q !== KS.tier && !KS.pick[l.k];
+        const porQ = TORD.map(q => [q, x.ops.filter(o => (TIER[o.q] ? o.q : "E") === q).sort((a, b) => (b.pr > 0) - (a.pr > 0) || a.pr - b.pr)]).filter(([, a]) => a.length);
+        return `<div class="mline${x.on ? "" : " off"}">
+          <div class="mlh"><input class="mchk" type="checkbox" data-on="${l.k}"${x.on ? " checked" : ""} aria-label="Incluir ${esc(l.n)}"><span class="mico">${ICON[l.ico]}</span>
+            <div class="mlt"><b>${esc(l.n)}</b><small>${esc(l.d)}</small></div>
+            <div class="mlp">${p.pr > 0 ? `<span class="price">${clp(p.pr * x.cant)}</span>` : precio(p)}${x.cant > 1 && p.pr > 0 ? `<span class="note">${x.cant} × ${clp(p.pr)}</span>` : ""}</div></div>
+          <div class="mpick"><a href="#/p/${encodeURIComponent(p.c)}" aria-label="Ver ${esc(p.d)}">${thumbImg(p)}</a>
+            <div class="qinfo"><span class="tag">${esc(p.c)}</span><a href="#/p/${encodeURIComponent(p.c)}"><div class="qd">${esc(p.d)}</div></a><div class="qm">${tierHTML(p.q)} ${esc([p.m, cap(p.p)].filter(Boolean).join(" · "))}</div>${distinta ? `<span class="mwarn">No hay en ${TIER[KS.tier].n} para tu auto: te proponemos ${TIER[p.q] ? TIER[p.q].n : "Económica"}</span>` : ""}</div>
+            <div class="qty"><button type="button" data-cn="${l.k}" data-d="-1" aria-label="Menos">−</button><input value="${x.cant}" readonly aria-label="Cantidad"><button type="button" data-cn="${l.k}" data-d="1" aria-label="Más">+</button></div></div>
+          ${x.ops.length > 1 ? `<details class="mopts"><summary>${ICON.car} Ver ${x.ops.length} opciones para tu auto${porQ.length > 1 ? ` en ${porQ.length} calidades` : ""}</summary><div class="olist">${porQ.map(([, a]) => a.map(o => opt(o, l)).join("")).join("")}</div></details>` : ""}
+        </div>`;
+      }).join("")}
+    </div>
+    <aside class="step msum"><h3>Tu kit</h3>
+      <div class="note">${esc(vehTxt)}</div>
+      <div>${sel.length ? sel.map(x => `<div class="ml"><span>${esc(x.l.n)}${x.cant > 1 ? ` ×${x.cant}` : ""}</span><b>${x.pick.pr > 0 ? clp(x.pick.pr * x.cant) : "Consultar"}</b></div>`).join("") : `<div class="note">Marca al menos una línea.</div>`}</div>
+      <div class="tot"><span>Total kit</span><b>${clp(tot)}</b></div>
+      ${nCons ? `<div class="note">${nCons} producto${nCons === 1 ? "" : "s"} sin precio: te lo confirmamos antes de pagar.</div>` : ""}
+      <button class="btn pri" type="button" id="mAdd"${sel.length ? "" : " disabled"}>${ICON.cart} Agregar kit al carrito (${sel.reduce((a, x) => a + x.cant, 0)})</button>
+      <div class="note">Precios referenciales de la maqueta · mano de obra no incluida.</div>
+      <div class="carbox"><h4>Recuérdame la próxima</h4><div class="mrem"><input id="mKm" inputmode="numeric" placeholder="Kilometraje actual"><button class="btn sec" type="button" id="mRem">Avísame</button></div><span class="note">Te avisamos por correo o WhatsApp cuando toque la siguiente mantención.</span></div>
+    </aside></div>`;
+    $("#app").innerHTML = h;
+    if (!keep) window.scrollTo(0, 0);
+    $("[data-crumb]").onclick = inicio;
+    $("#mCambia") && ($("#mCambia").onclick = () => { setVeh({}); window.scrollTo({ top: 0, behavior: "smooth" }); });
+    document.querySelectorAll("[data-tier]").forEach(b => b.onclick = () => { KS.tier = b.dataset.tier; KS.pick = {}; renderMantencion(true); });
+    document.querySelectorAll("[data-on]").forEach(b => b.onchange = () => { KS.off[b.dataset.on] = !b.checked; renderMantencion(true); });
+    document.querySelectorAll("[data-cn]").forEach(b => b.onclick = () => { const k = b.dataset.cn, x = L.find(y => y.l.k === k); KS.cant[k] = Math.max(1, x.cant + +b.dataset.d); renderMantencion(true); });
+    document.querySelectorAll("[data-pk]").forEach(b => b.onclick = () => { KS.pick[b.dataset.pk] = b.dataset.c; KS.off[b.dataset.pk] = false; renderMantencion(true); });
+    document.querySelectorAll("[data-wsp]").forEach(b => b.onclick = () => toast("WhatsApp: número por definir (próximamente)"));
+    $("#mAdd").onclick = () => { const c = carro(); sel.forEach(x => c[x.pick.c] = (c[x.pick.c] || 0) + x.cant); setCarro(c); toast(`Kit agregado al carrito · ${sel.length} repuesto${sel.length === 1 ? "" : "s"}`); abrirCarro(); };
+    $("#mRem").onclick = () => toast("Recordatorio de mantención: próximamente");
+  }
+
+  // ---------------- portada: entrada a la mantencion y productos en video
+  function promoHTML() {
+    return `<section class="promo" aria-label="Arma tu mantención"><span class="pi">${ICON.wrench}</span>
+      <div class="pt"><b>Arma tu mantención</b><span>Filtros de aceite, aire, polen y combustible + bujías que calzan con tu auto, en la calidad que prefieras.</span></div>
+      <a class="btn pri" href="#/mantencion">Armar mi kit</a></section>`;
+  }
+  function reelsHTML() {
+    const l = ITEMS.filter(i => i.v && !i.x);
+    if (!l.length) return "";
+    return `<section class="reels" aria-label="Productos en video"><h3>Míralos en video</h3><p class="rsub">Mira el repuesto y su empaque antes de comprar.</p>
+      <div class="rstrip">${l.map(i => `<a class="reel" href="#/p/${encodeURIComponent(i.c)}/video" data-reel="${esc(i.v)}"><img src="${esc(i.vp || (i.i || [])[0] || "")}" alt="" loading="lazy"><span class="rp">${ICON.play}</span><span class="ro"><b>${esc(i.s)}</b><small>${esc(i.c)}</small>${precio(i)}</span></a>`).join("")}</div></section>`;
+  }
+  function bindReels() {
+    document.querySelectorAll("[data-reel]").forEach(a => {
+      a.onmouseenter = () => {
+        if (a.querySelector("video")) return;
+        const vd = document.createElement("video");
+        vd.src = a.dataset.reel; vd.muted = true; vd.loop = true; vd.playsInline = true; vd.autoplay = true;
+        a.insertBefore(vd, a.querySelector(".rp")); vd.play().catch(() => {});
+      };
+      a.onmouseleave = () => { const vd = a.querySelector("video"); if (vd) vd.remove(); };
+    });
   }
 
   // ---------------- carrito
@@ -934,14 +1292,14 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
   const total = () => lineas().reduce((a, [i, n]) => a + i.pr * n, 0);
   function lineaHTML(i, n, edit) {
     return `<div class="ci"><div class="th">${i.i[0] ? `<img src="${esc(i.i[0])}" alt="">` : ""}</div>
-      <div><div class="t">${esc(i.d)}</div><div class="s mono">${esc(i.c)}</div><div class="s">${clp(i.pr)} c/u</div></div>
+      <div><div class="t">${esc(i.d)}</div><div class="s mono">${esc(i.c)}</div><div class="s">${i.pr > 0 ? clp(i.pr) + " c/u" : "Precio a consultar"}</div></div>
       <div class="r">${edit ? `<div class="qty"><button type="button" data-cq="${esc(i.c)}" data-d="-1" aria-label="Menos">−</button><input value="${n}" readonly aria-label="Cantidad"><button type="button" data-cq="${esc(i.c)}" data-d="1" aria-label="Más">+</button></div>` : `<span class="s">x${n}</span>`}
-      <b>${clp(i.pr * n)}</b>${edit ? `<button class="link" type="button" data-rm="${esc(i.c)}">Quitar</button>` : ""}</div></div>`;
+      <b>${i.pr > 0 ? clp(i.pr * n) : "Consultar"}</b>${edit ? `<button class="link" type="button" data-rm="${esc(i.c)}">Quitar</button>` : ""}</div></div>`;
   }
   function abrirCarro() {
     const d = $("#dCarro"), l = lineas();
     d.innerHTML = `<div class="dw"><div class="dh"><h2>Tu carrito</h2><button class="xbtn" type="button" data-close>Cerrar</button></div>
-      <div class="db">${l.length ? l.map(([i, n]) => lineaHTML(i, n, true)).join("") : `<div class="empty" style="margin-top:16px"><b>Tu carrito está vacío</b>Agrega repuestos desde el catálogo.</div>`}</div>
+      <div class="db">${l.length ? l.map(([i, n]) => lineaHTML(i, n, true)).join("") + (l.some(([i]) => !(i.pr > 0)) ? `<div class="note" style="margin-top:10px">Los productos sin precio se confirman por WhatsApp o en tienda.</div>` : "") : `<div class="empty" style="margin-top:16px"><b>Tu carrito está vacío</b>Agrega repuestos desde el catálogo.</div>`}</div>
       <div class="df"><div class="tot"><span>Subtotal</span><b>${clp(total())}</b></div><div class="note">Despacho e impuestos se calculan en el pago.</div>
       <button class="btn pri" type="button" id="bPagar"${l.length ? "" : " disabled"}>Ir a pagar</button><button class="btn" type="button" data-close>Seguir comprando</button></div></div>`;
     d.querySelectorAll("[data-close]").forEach(b => b.onclick = () => d.close());
@@ -1069,21 +1427,24 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
 
   // ---------------- busqueda, ruteo, util
   let tq;
-  $("#q").addEventListener("input", e => { clearTimeout(tq); tq = setTimeout(() => { S.q = e.target.value.trim(); S.lim = PAGE; if (location.hash.startsWith("#/p/") || location.hash === "#/pago") go("#/"); else refresh(); }, 180); });
+  $("#q").addEventListener("input", e => { clearTimeout(tq); tq = setTimeout(() => { S.q = e.target.value.trim(); S.lim = PAGE; if (location.hash.startsWith("#/p/") || location.hash === "#/pago" || location.hash === "#/mantencion") go("#/"); else refresh(); }, 180); });
   function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("show"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("show"), 1700); }
   function go(h) { if (location.hash === h) refresh(); else location.hash = h; }
   function refresh() {
     renderVeh();
     const h = decodeURIComponent(location.hash.slice(1) || "/");
-    if (h.startsWith("/p/")) renderProducto(h.slice(3));
+    clearInterval(heroTimer);
+    if (h.startsWith("/p/")) { const r = h.slice(3).split("/"); renderProducto(r[0], r[1] === "video"); }
     else if (h === "/pago") renderPago();
+    else if (h === "/mantencion") renderMantencion();
     else renderCatalogo();
   }
   window.addEventListener("hashchange", refresh);
   document.addEventListener("click", e => { const d = e.target.closest("dialog"); if (d && e.target === d) d.close(); });
   if (D.logo) { const li = $("#logoImg"); li.src = D.logo; li.hidden = false; $(".logo").classList.add("con-img"); }
   $("#bWsp").onclick = () => toast("WhatsApp: número por definir (próximamente)");
-  $("#gen").textContent = (D.muestra ? `Maqueta con ${ITEMS.length} productos de muestra · ` : `${ITEMS.length} productos · `) + "datos al " + (D.generado || "");
+  const nVis = ITEMS.filter(i => !i.x).length;
+  $("#gen").textContent = (D.muestra ? `Maqueta con ${nVis} productos de muestra · ` : `${nVis} productos · `) + "datos al " + (D.generado || "");
   pintaBadge(); pintaCuenta();
   const m = preferido();
   if (m) { S.marca = m.marca; S.modelo = m.modelo; S.motor = m.motor || ""; S.anio = m.anio ? String(m.anio) : ""; S.miAuto = true; }
