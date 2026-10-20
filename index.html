@@ -545,6 +545,58 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
   .rstrip { grid-auto-columns: 140px; }
   .promo .pt b { font-size: 21px; }
 }
+/* v10: barra de videos, catalogo en video, video chico en la ficha */
+.reels .rhead { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; margin-bottom: 12px; }
+.reels .rhead .rsub { margin-bottom: 0; }
+.vall { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14px; color: var(--brand); text-decoration: none; background: var(--surface); border: 1px solid var(--line-2); border-radius: 99px; padding: 8px 14px; }
+.vall:hover { border-color: var(--brand); background: var(--brand-soft); }
+.rwrap { position: relative; }
+.rstrip { scrollbar-width: thin; scrollbar-color: var(--brand) var(--line); padding-bottom: 16px; }
+.rstrip::-webkit-scrollbar { height: 6px; }
+.rstrip::-webkit-scrollbar-track { background: var(--line); border-radius: 99px; }
+.rstrip::-webkit-scrollbar-thumb { background: var(--brand); border-radius: 99px; }
+.rstrip::-webkit-scrollbar-thumb:hover { background: var(--red); }
+.rnav { position: absolute; top: calc(50% - 8px); transform: translateY(-50%); z-index: 3; width: 42px; height: 42px; border-radius: 99px; border: 0; background: var(--surface); color: var(--brand); box-shadow: var(--shadow-up); font-size: 28px; line-height: 1; cursor: pointer; display: grid; place-items: center; padding-bottom: 3px; }
+.rnav:hover { background: var(--red); color: #fff; }
+.rnav.prev { left: -14px; } .rnav.next { right: -14px; }
+.reel.rmore { display: grid; place-content: center; justify-items: center; gap: 8px; text-align: center; padding: 16px; background: linear-gradient(160deg, var(--band) 0%, var(--band-2) 100%); border-color: transparent; }
+.reel.rmore span { width: 52px; height: 52px; border-radius: 99px; background: var(--red); display: grid; place-items: center; }
+.reel.rmore b { font-family: var(--f-display); font-size: 21px; text-transform: uppercase; line-height: 1.05; }
+.reel.rmore small { color: var(--band-muted); font-size: 12.5px; }
+.reel .rfit { position: absolute; top: 10px; right: 10px; display: inline-flex; gap: 4px; align-items: center; font-size: 11px; font-weight: 700; background: var(--ok); color: #fff; padding: 3px 8px; border-radius: 99px; }
+.reel .ro .tier { justify-self: start; background: rgba(255, 255, 255, .92); }
+.vhead { padding: 18px 22px; }
+.vhead h1 { font-size: clamp(28px, 3.6vw, 40px); }
+.vchips { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 14px; }
+.vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+.vgrid .reel .ro b { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.rpbody { flex: 1; min-height: 0; position: relative; display: grid; grid-template-columns: auto minmax(0, 340px); justify-content: center; align-items: center; gap: 24px; padding: 0 64px; }
+.rpvid { height: min(calc(100vh - 110px), 820px); aspect-ratio: 9 / 16; }
+.rpvid video { width: 100%; height: 100%; object-fit: contain; background: #fff; border-radius: 16px; display: block; }
+.rpinfo { background: var(--surface); color: var(--ink); border-radius: 16px; padding: 18px; display: grid; gap: 10px; box-shadow: var(--shadow-up); }
+.rpinfo h3 { margin: 0; font-family: var(--f-display); text-transform: uppercase; font-size: 24px; line-height: 1.05; }
+.rpinfo .tag { justify-self: start; }
+.rpinfo .fit { justify-self: start; }
+.rpinfo .price { font-size: 34px; }
+.rpact { display: flex; gap: 8px; flex-wrap: wrap; }
+.rpact .add { padding: 10px 14px; font-size: 14px; }
+.rpact .btn { padding: 9px 14px; font-size: 14px; }
+.vimg video { height: auto; max-height: calc(100vh - 150px); width: auto; max-width: 100%; }
+.rpact .add .lbl { display: inline; }
+@media (max-width: 640px) { .fsl { display: none; } }
+.bigw { position: relative; }
+.vmini { position: absolute; right: 14px; bottom: 14px; z-index: 3; width: 112px; aspect-ratio: 9 / 16; padding: 0; border: 3px solid #fff; border-radius: 14px; overflow: hidden; background: #fff; cursor: pointer; box-shadow: 0 8px 24px rgba(20, 8, 40, .35); transition: transform .15s; }
+.vmini:hover { transform: scale(1.05); }
+.vmini video { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.vmini .vml { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 18px 4px 7px; background: linear-gradient(transparent, rgba(20, 8, 40, .88)); color: #fff; font-size: 11px; font-weight: 700; }
+@media (max-width: 900px) {
+  .rpbody { grid-template-columns: 1fr; justify-items: center; align-content: start; padding: 0; gap: 10px; overflow: auto; }
+  .rpvid { height: 58vh; }
+  .rpinfo { width: min(420px, 100%); padding: 12px 14px; gap: 6px; }
+  .rpinfo h3 { font-size: 19px; } .rpinfo .price { font-size: 26px; }
+  .rpbody .vnav { top: 29vh; }
+}
+@media (max-width: 640px) { .rnav { display: none; } .vgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .vmini { width: 84px; right: 10px; bottom: 10px; } }
 </style>
 </head>
 <body>
@@ -596,7 +648,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
   <span class="lbl">WhatsApp</span>
 </button>
 
-<script src="datos.js?v=202610201854"></script>
+<script src="datos.js?v=202610201932"></script>
 <script>
 (function () {
   "use strict";
@@ -1004,11 +1056,9 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     if (veh) compat = fitsVeh(i, v) ? `<div class="compat ok">${ICON.ok}<div><b>Compatible con tu ${esc(veh)}</b>Según las aplicaciones cargadas.</div></div>`
       : `<div class="compat no"><div><b>No confirmado para tu ${esc(veh)}</b>Revisa las aplicaciones o consúltanos con tu patente.</div></div>`;
     else if ((i.a || []).length) compat = `<div class="compat nv"><div><b>¿Le sirve a tu auto?</b>Elige tu vehículo arriba y te decimos si es compatible.</div></div>`;
-    const MED = media(i);
-    const bigHTML = m => !m ? ICON.photo : m.t === "vid"
-      ? `<video src="${esc(m.s)}"${m.p ? ` poster="${esc(m.p)}"` : ""} controls autoplay muted loop playsinline preload="metadata"></video>`
-      : `<img src="${esc(m.s)}" alt="${esc(i.d)}">`;
-    let fAct = conVideo && i.v ? MED.length - 1 : 0;
+    const MED = media(i), VI = MED.findIndex(m => m.t === "vid"), NI = (i.i || []).length;
+    const bigHTML = m => m && m.t === "img" ? `<img src="${esc(m.s)}" alt="${esc(i.d)}">` : i.vp ? `<img src="${esc(i.vp)}" alt="${esc(i.d)}">` : ICON.photo;
+    let fAct = 0;
     const grupo = otras(i), qs = [...new Set(grupo.map(x => x.q))];
     const desde = grupo.filter(x => x.pr > 0).reduce((a, x) => Math.min(a, x.pr), Infinity);
     const spec = [["Código (SKU)", `<span class="mono">${esc(i.c)}</span>`]];
@@ -1054,7 +1104,8 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
       <div class="crumbs back"><button type="button" data-back>‹ Volver</button> · <button type="button" data-crumbf="${esc(i.f)}">${esc(i.f)}</button> › <button type="button" data-crumbf="${esc(i.f)}" data-crumbs="${esc(i.s)}">${esc(i.s)}</button></div>
       <div class="pd">
         <div class="gal">
-          <div class="big" id="big" role="button" tabindex="0" title="Ver en grande" aria-label="Ver fotos en grande">${bigHTML(MED[fAct])}</div>
+          <div class="bigw"><div class="big" id="big" role="button" tabindex="0" title="Ver en grande" aria-label="Ver fotos en grande">${bigHTML(MED[fAct])}</div>
+          ${i.v ? `<button class="vmini" type="button" id="bVid" aria-label="Ver el video en grande"><video src="${esc(i.v)}"${i.vp ? ` poster="${esc(i.vp)}"` : ""} muted autoplay loop playsinline preload="metadata"></video><span class="vml">${ICON.play} Ver en grande</span></button>` : ""}</div>
           ${MED.length > 1 ? `<div class="thumbs">${MED.map((m, k) => `<button type="button" data-ft="${k}"${m.t === "vid" ? ' class="tv"' : ""} aria-current="${k === fAct}" aria-label="${m.t === "vid" ? "Video" : "Foto " + (k + 1)}">${m.t === "vid" && !m.p ? ICON.play : `<img src="${esc(m.t === "vid" ? m.p : m.s)}" alt="" loading="lazy">`}</button>`).join("")}</div>` : ""}
         </div>
         <div class="box">
@@ -1099,19 +1150,19 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
       b.setAttribute("aria-expanded", !o); b.firstChild.textContent = o ? `Ver todas las referencias (${oem.length}) ` : "Ver menos ";
     });
     const big = $("#big");
+    // fotos en el cuadro grande; el video va chico en la esquina y se abre en grande
     const pintaBig = k => {
       fAct = k; big.innerHTML = bigHTML(MED[k]);
-      if (i.v && MED[k].t !== "vid") big.insertAdjacentHTML("beforeend", `<button class="vplay" type="button" id="bVid">${ICON.play} Ver video</button>`);
-      $("#bVid") && ($("#bVid").onclick = e => { e.stopPropagation(); pintaBig(MED.length - 1); });
-      big.classList.toggle("zoom", MED[k].t === "img");
       document.querySelectorAll("[data-ft]").forEach(x => x.setAttribute("aria-current", +x.dataset.ft === k));
     };
     if (MED.length) {
-      pintaBig(fAct);
-      big.onclick = e => { if (MED[fAct].t === "img" && !e.target.closest("video")) abrirVisor(i, fAct); };
-      big.onkeydown = e => { if ((e.key === "Enter" || e.key === " ") && MED[fAct].t === "img") { e.preventDefault(); abrirVisor(i, fAct); } };
+      big.classList.add("zoom");
+      big.onclick = () => abrirVisor(i, NI ? fAct : VI);
+      big.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrirVisor(i, NI ? fAct : VI); } };
     }
-    document.querySelectorAll("[data-ft]").forEach(b => b.onclick = () => pintaBig(+b.dataset.ft));
+    $("#bVid") && ($("#bVid").onclick = () => abrirVisor(i, VI));
+    document.querySelectorAll("[data-ft]").forEach(b => b.onclick = () => { const k = +b.dataset.ft; if (MED[k].t === "vid") abrirVisor(i, k); else pintaBig(k); });
+    if (conVideo && VI >= 0) setTimeout(() => abrirVisor(i, VI), 60);
     $("#bKit") && ($("#bKit").onclick = () => { const l = KIT.find(k => k.f(i)); KS.veh = vehKey(curVeh()); KS.pick[l.k] = i.c; KS.off[l.k] = false; });
     $("#bQ") && ($("#bQ").onclick = () => $("#calidades").scrollIntoView({ behavior: "smooth", block: "start" }));
     document.querySelectorAll("[data-q]").forEach(b => b.onclick = () => { const n = $("#qn"); n.value = Math.max(1, (+n.value || 1) + +b.dataset.q); });
@@ -1131,10 +1182,11 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     const ver = m => m.t === "vid" ? `<video src="${esc(m.s)}"${m.p ? ` poster="${esc(m.p)}"` : ""} controls autoplay muted loop playsinline></video>` : `<img src="${esc(m.s)}" alt="${esc(i.d)}">`;
     function pinta() {
       d.innerHTML = `<div class="vw">
-        <div class="vh"><span class="tag">${esc(i.c)}</span><span class="vt">${esc(i.d)}</span><span class="vn">${k + 1} / ${n}</span><button class="xbtn" type="button" data-close>Cerrar ✕</button></div>
+        <div class="vh"><span class="tag">${esc(i.c)}</span><span class="vt">${esc(i.d)}</span><span class="vn">${k + 1} / ${n}</span>${M[k].t === "vid" ? `<button class="xbtn" type="button" data-fs aria-label="Pantalla completa">⛶<span class="fsl"> Pantalla completa</span></button>` : ""}<button class="xbtn" type="button" data-close>Cerrar ✕</button></div>
         <div class="vimg">${n > 1 ? `<button class="vnav prev" type="button" aria-label="Foto anterior">‹</button>` : ""}${ver(M[k])}${n > 1 ? `<button class="vnav next" type="button" aria-label="Foto siguiente">›</button>` : ""}</div>
         ${n > 1 ? `<div class="vthumbs">${M.map((m, j) => `<button type="button" data-vj="${j}"${m.t === "vid" ? ' class="tv"' : ""} aria-current="${j === k}">${m.t === "vid" && !m.p ? ICON.play : `<img src="${esc(m.t === "vid" ? m.p : m.s)}" alt="${m.t === "vid" ? "Video" : "Foto " + (j + 1)}">`}</button>`).join("")}</div>` : ""}</div>`;
       d.querySelector("[data-close]").onclick = () => d.close();
+      d.querySelector("[data-fs]") && (d.querySelector("[data-fs]").onclick = () => pantallaCompleta(d.querySelector("video")));
       d.querySelector(".prev") && (d.querySelector(".prev").onclick = () => { k = (k - 1 + n) % n; pinta(); });
       d.querySelector(".next") && (d.querySelector(".next").onclick = () => { k = (k + 1) % n; pinta(); });
       d.querySelectorAll("[data-vj]").forEach(b => b.onclick = () => { k = +b.dataset.vj; pinta(); });
@@ -1258,13 +1310,23 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
       <div class="pt"><b>Arma tu mantención</b><span>Filtros de aceite, aire, polen y combustible + bujías que calzan con tu auto, en la calidad que prefieras.</span></div>
       <a class="btn pri" href="#/mantencion">Armar mi kit</a></section>`;
   }
-  function reelsHTML() {
-    const l = ITEMS.filter(i => i.v && !i.x);
-    if (!l.length) return "";
-    return `<section class="reels" aria-label="Productos en video"><h3>Míralos en video</h3><p class="rsub">Mira el repuesto y su empaque antes de comprar.</p>
-      <div class="rstrip">${l.map(i => `<a class="reel" href="#/p/${encodeURIComponent(i.c)}/video" data-reel="${esc(i.v)}"><img src="${esc(i.vp || (i.i || [])[0] || "")}" alt="" loading="lazy"><span class="rp">${ICON.play}</span><span class="ro"><b>${esc(i.s)}</b><small>${esc(i.c)}</small>${precio(i)}</span></a>`).join("")}</div></section>`;
+  function reelHTML(i, k, extra) {
+    const v = curVeh();
+    return `<a class="reel" href="#/p/${encodeURIComponent(i.c)}" data-reel="${esc(i.v)}" data-ri="${k}"><img src="${esc(i.vp || (i.i || [])[0] || "")}" alt="" loading="lazy"><span class="rp">${ICON.play}</span>
+      ${extra && vehOn(v) && fitsVeh(i, v) ? `<span class="rfit">${ICON.ok} Compatible</span>` : ""}
+      <span class="ro">${extra ? tierHTML(i.q) : ""}<b>${esc(extra ? i.d : i.s)}</b><small>${esc(i.c)}</small>${precio(i)}</span></a>`;
   }
-  function bindReels() {
+  const VIDS = () => ITEMS.filter(i => i.v && !i.x);
+  function reelsHTML() {
+    const l = VIDS();
+    if (!l.length) return "";
+    return `<section class="reels" aria-label="Productos en video"><div class="rhead"><div><h3>Míralos en video</h3><p class="rsub">Mira el repuesto y su empaque antes de comprar.</p></div>
+      <a class="vall" href="#/videos">Ver todo (${l.length}) ${ICON.car}</a></div>
+      <div class="rwrap"><button class="rnav prev" type="button" aria-label="Anteriores" hidden>‹</button>
+      <div class="rstrip">${l.map((i, k) => reelHTML(i, k)).join("")}<a class="reel rmore" href="#/videos"><span>${ICON.play}</span><b>Ver todo el catálogo en video</b><small>${l.length} repuestos</small></a></div>
+      <button class="rnav next" type="button" aria-label="Siguientes">›</button></div></section>`;
+  }
+  function bindReels(lista) {
     document.querySelectorAll("[data-reel]").forEach(a => {
       a.onmouseenter = () => {
         if (a.querySelector("video")) return;
@@ -1273,7 +1335,68 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
         a.insertBefore(vd, a.querySelector(".rp")); vd.play().catch(() => {});
       };
       a.onmouseleave = () => { const vd = a.querySelector("video"); if (vd) vd.remove(); };
+      a.onclick = e => { e.preventDefault(); abrirReel(lista || VIDS(), +a.dataset.ri); };
     });
+    document.querySelectorAll(".rwrap").forEach(w => {
+      const s = w.querySelector(".rstrip"), pv = w.querySelector(".prev"), nx = w.querySelector(".next");
+      const upd = () => { pv.hidden = s.scrollLeft < 8; nx.hidden = s.scrollLeft + s.clientWidth > s.scrollWidth - 8; };
+      pv.onclick = () => s.scrollBy({ left: -s.clientWidth * .8, behavior: "smooth" });
+      nx.onclick = () => s.scrollBy({ left: s.clientWidth * .8, behavior: "smooth" });
+      s.addEventListener("scroll", upd, { passive: true }); upd();
+    });
+  }
+
+  // ---------------- catalogo en video (#/videos)
+  const VS = { fam: "" };
+  function renderVideos() {
+    const v = curVeh(), veh = vehOn(v);
+    const todos = VIDS();
+    const fams = new Map();
+    todos.forEach(i => fams.set(i.f, (fams.get(i.f) || 0) + 1));
+    let l = todos.filter(i => !VS.fam || i.f === VS.fam);
+    if (veh) l = l.slice().sort((a, b) => fitsVeh(b, v) - fitsVeh(a, v));
+    const vehTxt = [cap(v.marca), v.modelo, v.motor, v.anio].filter(Boolean).join(" ");
+    $("#app").innerHTML = `<div class="crumbs back"><button type="button" data-crumb="">‹ Inicio</button></div>
+      <section class="mhead vhead"><h1>Catálogo en video</h1>
+        <p>${todos.length} repuestos en video. Pasa el mouse para verlos en movimiento y haz clic para verlos en grande con su precio.${veh ? ` Primero los compatibles con tu ${esc(vehTxt)}.` : ""}</p></section>
+      <div class="vchips"><button class="chip${!VS.fam ? " on" : ""}" type="button" data-vf="">Todos (${todos.length})</button>${[...fams.entries()].sort((a, b) => a[0].localeCompare(b[0], "es")).map(([f, n]) => `<button class="chip${VS.fam === f ? " on" : ""}" type="button" data-vf="${esc(f)}">${esc(f)} (${n})</button>`).join("")}</div>
+      <div class="vgrid">${l.map((i, k) => reelHTML(i, k, true)).join("")}</div>`;
+    window.scrollTo(0, 0);
+    $("[data-crumb]").onclick = inicio;
+    document.querySelectorAll("[data-vf]").forEach(b => b.onclick = () => { VS.fam = b.dataset.vf; renderVideos(); });
+    bindReels(l);
+  }
+  // reproductor grande: video + datos del producto, con anterior / siguiente
+  function abrirReel(lista, k) {
+    const d = $("#dFoto"), n = lista.length;
+    function pinta() {
+      const i = lista[k], v = curVeh();
+      d.innerHTML = `<div class="vw"><div class="vh"><span class="vt">Catálogo en video</span><span class="vn">${k + 1} / ${n}</span><button class="xbtn" type="button" data-fs aria-label="Pantalla completa">⛶<span class="fsl"> Pantalla completa</span></button><button class="xbtn" type="button" data-close>Cerrar ✕</button></div>
+        <div class="rpbody">${n > 1 ? `<button class="vnav prev" type="button" aria-label="Video anterior">‹</button>` : ""}
+          <div class="rpvid"><video src="${esc(i.v)}"${i.vp ? ` poster="${esc(i.vp)}"` : ""} controls autoplay muted loop playsinline></video></div>
+          <div class="rpinfo"><span class="tag">${esc(i.c)}</span><h3>${esc(i.d)}</h3>
+            <div class="qm">${tierHTML(i.q)} ${esc([i.m, cap(i.p)].filter(Boolean).join(" · "))}</div>
+            ${vehOn(v) ? (fitsVeh(i, v) ? `<span class="fit ok">${ICON.ok} Compatible con tu vehículo</span>` : `<span class="fit no">No confirmado para tu vehículo</span>`) : ""}
+            <div class="note">${esc(i.f)} › ${esc(i.s)}</div>
+            ${precio(i, true)}
+            <div class="rpact"><button class="add" type="button" data-radd="${esc(i.c)}">${ICON.cart}<span class="lbl">Agregar al carrito</span></button><a class="btn" href="#/p/${encodeURIComponent(i.c)}" data-rfi>Ver ficha</a></div></div>
+          ${n > 1 ? `<button class="vnav next" type="button" aria-label="Video siguiente">›</button>` : ""}</div></div>`;
+      d.querySelector("[data-close]").onclick = () => d.close();
+      d.querySelector("[data-fs]").onclick = () => pantallaCompleta(d.querySelector("video"));
+      d.querySelector("[data-rfi]").onclick = () => d.close();
+      d.querySelector("[data-radd]").onclick = e => addCarro(i.c, 1, e.currentTarget);
+      d.querySelector(".prev") && (d.querySelector(".prev").onclick = () => { k = (k - 1 + n) % n; pinta(); });
+      d.querySelector(".next") && (d.querySelector(".next").onclick = () => { k = (k + 1) % n; pinta(); });
+    }
+    d.onkeydown = e => { if (n > 1 && e.key === "ArrowLeft") { k = (k - 1 + n) % n; pinta(); } if (n > 1 && e.key === "ArrowRight") { k = (k + 1) % n; pinta(); } };
+    d.onclick = e => { if (e.target === d || e.target.classList.contains("rpbody")) d.close(); };
+    pinta();
+    if (!d.open) d.showModal();
+  }
+  function pantallaCompleta(el) {
+    if (!el) return;
+    const f = el.requestFullscreen || el.webkitRequestFullscreen || el.webkitEnterFullscreen;
+    if (f) try { const r = f.call(el); r && r.catch && r.catch(() => {}); } catch (e) { /* sin pantalla completa */ }
   }
 
   // ---------------- carrito
@@ -1427,7 +1550,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
 
   // ---------------- busqueda, ruteo, util
   let tq;
-  $("#q").addEventListener("input", e => { clearTimeout(tq); tq = setTimeout(() => { S.q = e.target.value.trim(); S.lim = PAGE; if (location.hash.startsWith("#/p/") || location.hash === "#/pago" || location.hash === "#/mantencion") go("#/"); else refresh(); }, 180); });
+  $("#q").addEventListener("input", e => { clearTimeout(tq); tq = setTimeout(() => { S.q = e.target.value.trim(); S.lim = PAGE; if (location.hash.startsWith("#/p/") || location.hash === "#/pago" || location.hash === "#/mantencion" || location.hash === "#/videos") go("#/"); else refresh(); }, 180); });
   function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("show"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("show"), 1700); }
   function go(h) { if (location.hash === h) refresh(); else location.hash = h; }
   function refresh() {
@@ -1437,6 +1560,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     if (h.startsWith("/p/")) { const r = h.slice(3).split("/"); renderProducto(r[0], r[1] === "video"); }
     else if (h === "/pago") renderPago();
     else if (h === "/mantencion") renderMantencion();
+    else if (h === "/videos") renderVideos();
     else renderCatalogo();
   }
   window.addEventListener("hashchange", refresh);
