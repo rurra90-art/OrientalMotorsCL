@@ -320,7 +320,7 @@ dialog.modal { width: min(560px, calc(100vw - 24px)); max-height: calc(100vh - 2
 /* ---------- responsive ---------- */
 @media (max-width: 1080px) { .vsel { flex-basis: 100%; } }
 @media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; }
+  .layout { grid-template-columns: minmax(0, 1fr); }
   .side { display: none; }
   .right .btn-fil { display: inline-flex; }
   .pd, .pay { grid-template-columns: 1fr; }
@@ -551,6 +551,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
 .vall { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14px; color: var(--brand); text-decoration: none; background: var(--surface); border: 1px solid var(--line-2); border-radius: 99px; padding: 8px 14px; }
 .vall:hover { border-color: var(--brand); background: var(--brand-soft); }
 .rwrap { position: relative; }
+.layout > section, .reels, .rwrap, .rstrip { min-width: 0; }
 .rstrip { scrollbar-width: thin; scrollbar-color: var(--brand) var(--line); padding-bottom: 16px; }
 .rstrip::-webkit-scrollbar { height: 6px; }
 .rstrip::-webkit-scrollbar-track { background: var(--line); border-radius: 99px; }
@@ -1323,7 +1324,7 @@ dialog.sheet { margin: 0 auto 0 0; height: 100%; max-height: 100%; width: min(34
     return `<section class="reels" aria-label="Productos en video"><div class="rhead"><div><h3>Míralos en video</h3><p class="rsub">Mira el repuesto y su empaque antes de comprar.</p></div>
       <a class="vall" href="#/videos">Ver todo (${l.length}) ${ICON.car}</a></div>
       <div class="rwrap"><button class="rnav prev" type="button" aria-label="Anteriores" hidden>‹</button>
-      <div class="rstrip">${l.map((i, k) => reelHTML(i, k)).join("")}<a class="reel rmore" href="#/videos"><span>${ICON.play}</span><b>Ver todo el catálogo en video</b><small>${l.length} repuestos</small></a></div>
+      <div class="rstrip">${l.slice(0, 24).map((i, k) => reelHTML(i, k)).join("")}<a class="reel rmore" href="#/videos"><span>${ICON.play}</span><b>Ver todo el catálogo en video</b><small>${l.length} repuestos</small></a></div>
       <button class="rnav next" type="button" aria-label="Siguientes">›</button></div></section>`;
   }
   function bindReels(lista) {
