@@ -88,10 +88,11 @@ const fmt=n=>n.toLocaleString('es-CL'); const money=n=>'$'+Math.round(n).toLocal
  const opts=Object.keys(c).sort((a,b)=>c[b]-c[a]);
  document.getElementById('fmodelo').innerHTML='<option value="">Todos los modelos ('+DATA.length+')</option>'+
   opts.map(m=>'<option value="'+m+'">'+m+' ('+c[m]+')</option>').join('');})();
+DATA.forEach(r=>r._h=(r.c+' '+r.d+' '+(r.b||'')+' '+r.mo.join(' ')+' '+r.ap.join(' ')).toUpperCase());
 function filtered(){const q=document.getElementById('q').value.trim().toUpperCase();
  const fm=document.getElementById('fmodelo').value,fk=document.getElementById('fclase').value,fe=document.getElementById('fmeli').value;
  return DATA.filter(r=>{if(fm&&!r.mo.includes(fm))return false;if(fk&&r.k!==fk)return false;if(fe&&r.p!==fe)return false;
-  if(q&&!(r.c.toUpperCase().includes(q)||r.d.toUpperCase().includes(q)))return false;return true;});}
+  if(q&&!r._h.includes(q))return false;return true;});}
 function badge(k){return k==='inmovilizado'?'<span class="badge b-inm">inmovilizado</span>':
  k==='sobrestock'?'<span class="badge b-sob">sobrestock</span>':k==='kit'?'<span class="badge b-kit">kit</span>':'<span class="badge">'+k+'</span>';}
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
